@@ -3,7 +3,7 @@
 =========================================================== */
 
 const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycby4JtBEx6NoVt6PLdOdrYEtUCVMYMtMVA39_OxHTH-Mno2Hw4qjBI2kDt-WFewIJ_8V/exec";
+"https://script.google.com/macros/s/AKfycbw9MWwhfBELzAHwPsH2BIUThe4U-fmoYS9lTjxs2pQVnpHB_DM2M5bhY1hooeHcQTbP/exec";
 
 async function submitRegistration(data){
 

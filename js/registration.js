@@ -1,59 +1,76 @@
 /* ===========================================================
-   TECHVERSA 2026 REGISTRATION
-   PART 1
+   TECHSPARK 2026
+   REGISTRATION SYSTEM
 =========================================================== */
 
-/* ===========================
+
+/* ===========================================================
    ELEMENTS
-=========================== */
+=========================================================== */
 
 const form = document.getElementById("registrationForm");
 
 const steps = document.querySelectorAll(".step");
 
-const progressSteps = document.querySelectorAll(".progress-step");
+const progressSteps =
+    document.querySelectorAll(".progress-step");
 
-const eventCards = document.querySelectorAll(".event-card");
+const eventCards =
+    document.querySelectorAll(".event-card");
 
-const teamContainer = document.getElementById("teamContainer");
+const teamContainer =
+    document.getElementById("teamContainer");
 
-const paymentSection = document.getElementById("paymentSection");
+const paymentSection =
+    document.getElementById("paymentSection");
 
-const reviewContainer = document.getElementById("reviewContainer");
+const reviewContainer =
+    document.getElementById("reviewContainer");
 
-/* ===========================
+
+/* ===========================================================
    BUTTONS
-=========================== */
+=========================================================== */
 
-const next1 = document.getElementById("next1");
+const next1 =
+    document.getElementById("next1");
 
-const prevStep2 = document.getElementById("prevStep2");
+const prevStep2 =
+    document.getElementById("prevStep2");
 
-const nextStep2 = document.getElementById("nextStep2");
+const nextStep2 =
+    document.getElementById("nextStep2");
 
-const prevStep3 = document.getElementById("prevStep3");
+const prevStep3 =
+    document.getElementById("prevStep3");
 
-const nextStep3 = document.getElementById("nextStep3");
+const nextStep3 =
+    document.getElementById("nextStep3");
 
-const prevStep4 = document.getElementById("prevStep4");
+const prevStep4 =
+    document.getElementById("prevStep4");
+
 const submitBtn =
-document.getElementById("submitBtn");
-/* ===========================
+    document.getElementById("submitBtn");
+
+
+/* ===========================================================
    HIDDEN FIELDS
-=========================== */
+=========================================================== */
 
 const selectedEventInput =
-document.getElementById("selectedEvent");
+    document.getElementById("selectedEvent");
 
 const teamSizeInput =
-document.getElementById("teamSize");
+    document.getElementById("teamSize");
 
 const registrationFeeInput =
-document.getElementById("registrationFee");
+    document.getElementById("registrationFee");
 
-/* ===========================
+
+/* ===========================================================
    STATE
-=========================== */
+=========================================================== */
 
 let currentStep = 0;
 
@@ -63,73 +80,107 @@ let teamSize = 1;
 
 let registrationFee = 0;
 
-/* ===========================
+
+/* ===========================================================
    SHOW STEP
-=========================== */
+=========================================================== */
 
-function showStep(index){
+function showStep(index) {
 
-    steps.forEach(step=>{
+    /* Hide every step */
+
+    steps.forEach(step => {
+
+        step.classList.remove("active");
+        step.style.display = "none";
+
+    });
+
+
+    /* Reset progress */
+
+    progressSteps.forEach(step => {
 
         step.classList.remove("active");
 
     });
 
-    progressSteps.forEach(step=>{
 
-        step.classList.remove("active");
+    /* Safety check */
 
-    });
+    if (!steps[index]) {
 
-    steps[index].classList.add("active");
+        console.error(
+            "Registration step not found:",
+            index
+        );
 
-    for(let i=0;i<=index;i++){
-
-        progressSteps[i].classList.add("active");
+        return;
 
     }
 
-    currentStep=index;
+
+    /* Show only requested step */
+
+    steps[index].classList.add("active");
+    steps[index].style.display = "block";
+
+
+    /* Activate progress indicators */
+
+    for (let i = 0; i <= index; i++) {
+
+        if (progressSteps[i]) {
+
+            progressSteps[i].classList.add("active");
+
+        }
+
+    }
+
+
+    currentStep = index;
 
 }
 
-/* ===========================
-   VALIDATE STEP 1
-=========================== */
 
-function validateStep1(){
+/* ===========================================================
+   STEP 1 VALIDATION
+=========================================================== */
 
-    const requiredFields=[
+function validateStep1() {
+
+    const requiredFields = [
 
         "fullName",
-
         "rollNumber",
-
         "college",
-
         "course",
-
-        "branch",
-
         "year",
-
         "mobile",
-
         "email"
 
     ];
 
-    let valid=true;
 
-    requiredFields.forEach(id=>{
+    let valid = true;
 
-        const input=document.getElementById(id);
+
+    requiredFields.forEach(id => {
+
+        const input =
+            document.getElementById(id);
+
+
+        if (!input) return;
+
 
         input.classList.remove("error");
 
-        if(input.value.trim()===""){
 
-            valid=false;
+        if (input.value.trim() === "") {
+
+            valid = false;
 
             input.classList.add("error");
 
@@ -137,165 +188,251 @@ function validateStep1(){
 
     });
 
-    const mobile=document.getElementById("mobile").value;
 
-    if(!/^[6-9]\d{9}$/.test(mobile)){
+    const mobile =
+        document.getElementById("mobile");
 
-        valid=false;
 
-        document
-        .getElementById("mobile")
-        .classList
-        .add("error");
+    if (
+        mobile &&
+        !/^[6-9]\d{9}$/.test(
+            mobile.value.trim()
+        )
+    ) {
+
+        valid = false;
+
+        mobile.classList.add("error");
+
+    }
+
+
+    const email =
+        document.getElementById("email");
+
+
+    if (
+        email &&
+        !/^\S+@\S+\.\S+$/.test(
+            email.value.trim()
+        )
+    ) {
+
+        valid = false;
+
+        email.classList.add("error");
 
     }
 
-    const email=document.getElementById("email").value;
-
-    if(!/^\S+@\S+\.\S+$/.test(email)){
-
-        valid=false;
-
-        document
-        .getElementById("email")
-        .classList
-        .add("error");
-
-    }
 
     return valid;
 
 }
 
-/* ===========================
-   EVENT CARD SELECTION
-=========================== */
 
-eventCards.forEach(card=>{
+/* ===========================================================
+   EVENT SELECTION
+=========================================================== */
 
-    card.addEventListener("click",()=>{
+eventCards.forEach(card => {
 
-        eventCards.forEach(c=>{
+    card.addEventListener("click", function () {
 
-            c.classList.remove("selected");
+        /* Remove previous selection */
+
+        eventCards.forEach(item => {
+
+            item.classList.remove("selected");
 
         });
 
-        card.classList.add("selected");
 
-        selectedEvent=
+        /* Select clicked card */
 
-        card.dataset.event;
+        this.classList.add("selected");
 
-        teamSize=
 
-        Number(card.dataset.team);
+        /* Read event data */
 
-        registrationFee=
+        selectedEvent =
+            this.dataset.event;
 
-        Number(card.dataset.fee);
 
-        selectedEventInput.value=
+        teamSize =
+            Number(this.dataset.team);
 
-        selectedEvent;
 
-        teamSizeInput.value=
+        registrationFee =
+            Number(this.dataset.fee);
 
-        teamSize;
 
-        registrationFeeInput.value=
+        /* Store selected values */
 
-        registrationFee;
+        if (selectedEventInput) {
+
+            selectedEventInput.value =
+                selectedEvent;
+
+        }
+
+
+        if (teamSizeInput) {
+
+            teamSizeInput.value =
+                teamSize;
+
+        }
+
+
+        if (registrationFeeInput) {
+
+            registrationFeeInput.value =
+                registrationFee;
+
+        }
+
+
+        console.log(
+            "Selected Event:",
+            selectedEvent
+        );
+
+        console.log(
+            "Team Size:",
+            teamSize
+        );
+
+        console.log(
+            "Registration Fee:",
+            registrationFee
+        );
 
     });
 
 });
 
-/* ===========================
+
+
+/* ===========================================================
    STEP 1 → STEP 2
-=========================== */
+=========================================================== */
 
-next1.addEventListener("click",()=>{
+next1.addEventListener("click", () => {
 
-    if(!validateStep1()){
 
-        alert("Please complete all required fields.");
+    if (!validateStep1()) {
+
+        alert(
+            "Please complete all required fields correctly."
+        );
 
         return;
 
     }
+
 
     showStep(1);
 
 });
 
-/* ===========================
-   STEP 2 ← STEP 1
-=========================== */
 
-prevStep2.addEventListener("click",()=>{
-
-});
 /* ===========================================================
-   PART 2
-   STEP 2 → STEP 3
-   TEAM GENERATION
-   REVIEW
+   STEP 2 → STEP 1
 =========================================================== */
 
-/* ===========================
+prevStep2.addEventListener("click", () => {
+
+    showStep(0);
+
+});
+
+
+/* ===========================================================
    STEP 2 VALIDATION
-=========================== */
+=========================================================== */
 
-function validateStep2(){
+function validateStep2() {
 
-    if(selectedEvent===null){
 
-        alert("Please select an event.");
+    if (!selectedEvent) {
+
+        alert(
+            "Please select one competition."
+        );
 
         return false;
 
     }
 
+
     return true;
 
 }
 
-/* ===========================
-   GENERATE TEAM MEMBERS
-=========================== */
 
-function generateTeamFields(){
+/* ===========================================================
+   GENERATE TEAM FIELDS
+=========================================================== */
 
-    teamContainer.innerHTML="";
+function generateTeamFields() {
 
-    if(teamSize===1){
 
-        const card=document.createElement("div");
+    teamContainer.innerHTML = "";
 
-        card.className="team-card";
 
-        card.innerHTML=`
+    /* ===========================
+       INDIVIDUAL
+    =========================== */
+
+    if (teamSize === 1) {
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "team-card";
+
+
+        card.innerHTML = `
 
             <h3>Individual Participant</h3>
 
-            <p>No additional team members are required.</p>
+            <p>
+                No additional team members are required.
+            </p>
 
         `;
 
+
         teamContainer.appendChild(card);
+
 
         return;
 
     }
 
-    for(let i=2;i<=teamSize;i++){
 
-        const card=document.createElement("div");
+    /* ===========================
+       TEAM
+    =========================== */
 
-        card.className="team-card";
+    for (
+        let i = 2;
+        i <= teamSize;
+        i++
+    ) {
 
-        card.innerHTML=`
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "team-card";
+
+
+        card.innerHTML = `
 
             <h3>Team Member ${i}</h3>
 
@@ -303,7 +440,9 @@ function generateTeamFields(){
 
                 <div class="input-box">
 
-                    <label>Full Name</label>
+                    <label>
+                        Full Name
+                    </label>
 
                     <input
                         type="text"
@@ -313,9 +452,12 @@ function generateTeamFields(){
 
                 </div>
 
+
                 <div class="input-box">
 
-                    <label>Roll Number</label>
+                    <label>
+                        Roll Number
+                    </label>
 
                     <input
                         type="text"
@@ -325,26 +467,34 @@ function generateTeamFields(){
 
                 </div>
 
+
                 <div class="input-box">
 
-                    <label>Mobile Number</label>
+                    <label>
+                        Mobile Number
+                    </label>
 
                     <input
                         type="tel"
                         maxlength="10"
                         class="member-mobile"
-                        placeholder="Member ${i} Mobile">
+                        placeholder="Member ${i} Mobile"
+                        required>
 
                 </div>
 
+
                 <div class="input-box">
 
-                    <label>Email</label>
+                    <label>
+                        Email
+                    </label>
 
                     <input
                         type="email"
                         class="member-email"
-                        placeholder="Member ${i} Email">
+                        placeholder="Member ${i} Email"
+                        required>
 
                 </div>
 
@@ -352,251 +502,671 @@ function generateTeamFields(){
 
         `;
 
+
         teamContainer.appendChild(card);
 
     }
 
 }
 
-/* ===========================
+
+/* ===========================================================
    STEP 2 → STEP 3
-=========================== */
+=========================================================== */
 
-nextStep2.addEventListener("click",()=>{
+nextStep2.addEventListener("click", () => {
 
-    if(!validateStep2()) return;
 
-    generateTeamFields();
-
-    showStep(2);
-
-});
-
-/* ===========================
-   STEP 3 ← STEP 2
-=========================== */
-
-prevStep3.addEventListener("click",()=>{
-
-    showStep(1);
-
-});
-
-/* ===========================
-   STEP 3 VALIDATION
-=========================== */
-
-function validateTeam(){
-
-    if(teamSize===1) return true;
-
-    const names=
-
-    document.querySelectorAll(".member-name");
-
-    const rolls=
-
-    document.querySelectorAll(".member-roll");
-
-    let valid=true;
-
-    names.forEach(input=>{
-
-        input.classList.remove("error");
-
-        if(input.value.trim()===""){
-
-            valid=false;
-
-            input.classList.add("error");
-
-        }
-
-    });
-
-    rolls.forEach(input=>{
-
-        input.classList.remove("error");
-
-        if(input.value.trim()===""){
-
-            valid=false;
-
-            input.classList.add("error");
-
-        }
-
-    });
-
-    return valid;
-
-}
-
-/* ===========================
-   REVIEW PAGE
-=========================== */
-
-function loadReview(){
-
-    reviewContainer.innerHTML=`
-
-    <div class="review-card">
-
-        <h3>Participant</h3>
-
-        <div class="review-row">
-
-            <span class="review-label">Name</span>
-
-            <span class="review-value">
-
-            ${document.getElementById("fullName").value}
-
-            </span>
-
-        </div>
-
-        <div class="review-row">
-
-            <span class="review-label">Roll No</span>
-
-            <span class="review-value">
-
-            ${document.getElementById("rollNumber").value}
-
-            </span>
-
-        </div>
-
-        <div class="review-row">
-
-            <span class="review-label">College</span>
-
-            <span class="review-value">
-
-            ${document.getElementById("college").value}
-
-            </span>
-
-        </div>
-
-        <div class="review-row">
-
-            <span class="review-label">Event</span>
-
-            <span class="review-value">
-
-            ${selectedEvent}
-
-            </span>
-
-        </div>
-
-        <div class="review-row">
-
-            <span class="review-label">Team Size</span>
-
-            <span class="review-value">
-
-            ${teamSize}
-
-            </span>
-
-        </div>
-
-        <div class="review-row">
-
-            <span class="review-label">Registration Fee</span>
-
-            <span class="review-value">
-
-            ₹${registrationFee}
-
-            </span>
-
-        </div>
-
-    </div>
-
-    `;
-
-}
-
-/* ===========================
-   STEP 3 → STEP 4
-=========================== */
-
-nextStep3.addEventListener("click",()=>{
-
-    if(!validateTeam()){
-
-        alert("Please complete all team member details.");
+    if (!validateStep2()) {
 
         return;
 
     }
 
-    if(registrationFee===0){
 
-        paymentSection.style.display="none";
+    generateTeamFields();
 
-    }else{
 
-        paymentSection.style.display="block";
+    showStep(2);
+
+});
+
+
+/* ===========================================================
+   STEP 3 → STEP 2
+=========================================================== */
+
+prevStep3.addEventListener("click", () => {
+
+    showStep(1);
+
+});
+
+
+/* ===========================================================
+   TEAM VALIDATION
+=========================================================== */
+
+function validateTeam() {
+
+
+    if (teamSize === 1) {
+
+        return true;
 
     }
 
+
+    const names =
+        document.querySelectorAll(
+            ".member-name"
+        );
+
+
+    const rolls =
+        document.querySelectorAll(
+            ".member-roll"
+        );
+
+
+    const mobiles =
+        document.querySelectorAll(
+            ".member-mobile"
+        );
+
+
+    const emails =
+        document.querySelectorAll(
+            ".member-email"
+        );
+
+
+    let valid = true;
+
+
+    /* ===========================
+       NAME
+    =========================== */
+
+    names.forEach(input => {
+
+        input.classList.remove("error");
+
+
+        if (
+            input.value.trim() === ""
+        ) {
+
+            valid = false;
+
+            input.classList.add("error");
+
+        }
+
+    });
+
+
+    /* ===========================
+       ROLL
+    =========================== */
+
+    rolls.forEach(input => {
+
+        input.classList.remove("error");
+
+
+        if (
+            input.value.trim() === ""
+        ) {
+
+            valid = false;
+
+            input.classList.add("error");
+
+        }
+
+    });
+
+
+    /* ===========================
+       MOBILE
+    =========================== */
+
+    mobiles.forEach(input => {
+
+        input.classList.remove("error");
+
+
+        if (
+            !/^[6-9]\d{9}$/.test(
+                input.value.trim()
+            )
+        ) {
+
+            valid = false;
+
+            input.classList.add("error");
+
+        }
+
+    });
+
+
+    /* ===========================
+       EMAIL
+    =========================== */
+
+    emails.forEach(input => {
+
+        input.classList.remove("error");
+
+
+        if (
+            !/^\S+@\S+\.\S+$/.test(
+                input.value.trim()
+            )
+        ) {
+
+            valid = false;
+
+            input.classList.add("error");
+
+        }
+
+    });
+
+
+    return valid;
+
+}
+
+
+/* ===========================================================
+   COLLECT TEAM MEMBERS
+=========================================================== */
+
+function collectTeamMembers() {
+
+
+    if (teamSize === 1) {
+
+        return [];
+
+    }
+
+
+    const names =
+        document.querySelectorAll(
+            ".member-name"
+        );
+
+
+    const rolls =
+        document.querySelectorAll(
+            ".member-roll"
+        );
+
+
+    const mobiles =
+        document.querySelectorAll(
+            ".member-mobile"
+        );
+
+
+    const emails =
+        document.querySelectorAll(
+            ".member-email"
+        );
+
+
+    const members = [];
+
+
+    for (
+        let i = 0;
+        i < names.length;
+        i++
+    ) {
+
+        members.push({
+
+            name:
+                names[i].value.trim(),
+
+            rollNumber:
+                rolls[i].value.trim(),
+
+            mobile:
+                mobiles[i].value.trim(),
+
+            email:
+                emails[i].value.trim()
+
+        });
+
+    }
+
+
+    return members;
+
+}
+
+
+/* ===========================================================
+   REVIEW
+=========================================================== */
+
+function loadReview() {
+
+
+    const fullName =
+        document.getElementById(
+            "fullName"
+        ).value;
+
+
+    const rollNumber =
+        document.getElementById(
+            "rollNumber"
+        ).value;
+
+
+    const college =
+        document.getElementById(
+            "college"
+        ).value;
+
+
+    const course =
+        document.getElementById(
+            "course"
+        ).value;
+
+
+    const year =
+        document.getElementById(
+            "year"
+        ).value;
+
+
+    const mobile =
+        document.getElementById(
+            "mobile"
+        ).value;
+
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value;
+
+
+    reviewContainer.innerHTML = `
+
+        <div class="review-card">
+
+            <h3>
+                Participant Details
+            </h3>
+
+
+            <div class="review-row">
+
+                <span class="review-label">
+                    Name
+                </span>
+
+                <span class="review-value">
+                    ${escapeHtml(fullName)}
+                </span>
+
+            </div>
+
+
+            <div class="review-row">
+
+                <span class="review-label">
+                    Roll No
+                </span>
+
+                <span class="review-value">
+                    ${escapeHtml(rollNumber)}
+                </span>
+
+            </div>
+
+
+            <div class="review-row">
+
+                <span class="review-label">
+                    College
+                </span>
+
+                <span class="review-value">
+                    ${escapeHtml(college)}
+                </span>
+
+            </div>
+
+
+            <div class="review-row">
+
+                <span class="review-label">
+                    Course
+                </span>
+
+                <span class="review-value">
+                    ${escapeHtml(course)}
+                </span>
+
+            </div>
+
+
+            <div class="review-row">
+
+                <span class="review-label">
+                    Year
+                </span>
+
+                <span class="review-value">
+                    ${escapeHtml(year)}
+                </span>
+
+            </div>
+
+
+            <div class="review-row">
+
+                <span class="review-label">
+                    Mobile
+                </span>
+
+                <span class="review-value">
+                    ${escapeHtml(mobile)}
+                </span>
+
+            </div>
+
+
+            <div class="review-row">
+
+                <span class="review-label">
+                    Email
+                </span>
+
+                <span class="review-value">
+                    ${escapeHtml(email)}
+                </span>
+
+            </div>
+
+
+            <h3>
+                Competition Details
+            </h3>
+
+
+            <div class="review-row">
+
+                <span class="review-label">
+                    Competition
+                </span>
+
+                <span class="review-value">
+                    ${escapeHtml(selectedEvent)}
+                </span>
+
+            </div>
+
+
+            <div class="review-row">
+
+                <span class="review-label">
+                    Team Size
+                </span>
+
+                <span class="review-value">
+                    ${teamSize}
+                </span>
+
+            </div>
+
+
+            <div class="review-row">
+
+                <span class="review-label">
+                    Registration Fee
+                </span>
+
+                <span class="review-value">
+                    ${
+                        registrationFee === 0
+                            ? "FREE"
+                            : "₹" + registrationFee + " / Team"
+                    }
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ===========================================================
+   ESCAPE HTML
+=========================================================== */
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* ===========================================================
+   STEP 3 → STEP 4
+=========================================================== */
+
+nextStep3.addEventListener("click", () => {
+
+
+    if (!validateTeam()) {
+
+        alert(
+            "Please complete all team member details correctly."
+        );
+
+        return;
+
+    }
+
+
+    /* ===========================
+       PAYMENT CONDITION
+    =========================== */
+
+    if (registrationFee > 0) {
+
+        paymentSection.style.display =
+            "block";
+
+    } else {
+
+        paymentSection.style.display =
+            "none";
+
+    }
+
+
     loadReview();
+
 
     showStep(3);
 
 });
 
-/* ===========================
-   STEP 4 ← STEP 3
-=========================== */
 
-prevStep4.addEventListener("click",()=>{
+/* ===========================================================
+   STEP 4 → STEP 3
+=========================================================== */
+
+prevStep4.addEventListener("click", () => {
 
     showStep(2);
 
 });
+
+
 /* ===========================================================
-   PART 3
-   SUBMIT
-   REGISTRATION ID
-   QR CODE
-   SUCCESS PAGE
+   PAYMENT SCREENSHOT VALIDATION
 =========================================================== */
 
-const successPage = document.getElementById("successPage");
+function validatePayment() {
 
-const registrationIdElement =
-document.getElementById("registrationId");
 
-const qrCodeContainer =
-document.getElementById("qrCode");
+    /* FREE COMPETITIONS */
 
-/* ===========================
-   REGISTRATION ID
-=========================== */
+    if (registrationFee === 0) {
 
-function generateRegistrationId(){
+        return true;
 
-    const number =
-    Date.now().toString().slice(-4);
+    }
 
-    return `TV2026-${number}`;
+
+    const screenshot =
+        document.getElementById(
+            "paymentScreenshot"
+        );
+
+
+    if (
+        !screenshot ||
+        !screenshot.files ||
+        screenshot.files.length === 0
+    ) {
+
+        alert(
+            "Please upload the payment screenshot."
+        );
+
+        return false;
+
+    }
+
+
+    const file =
+        screenshot.files[0];
+
+
+    if (
+        !file.type.startsWith("image/")
+    ) {
+
+        alert(
+            "Please upload a valid image file."
+        );
+
+        return false;
+
+    }
+
+
+    const maxSize =
+        5 * 1024 * 1024;
+
+
+    if (file.size > maxSize) {
+
+        alert(
+            "Payment screenshot must be less than 5 MB."
+        );
+
+        return false;
+
+    }
+
+
+    return true;
 
 }
 
-/* ===========================
+
+/* ===========================================================
+   SUCCESS PAGE
+=========================================================== */
+
+const successPage =
+    document.getElementById(
+        "successPage"
+    );
+
+
+const registrationIdElement =
+    document.getElementById(
+        "registrationId"
+    );
+
+
+const qrCodeContainer =
+    document.getElementById(
+        "qrCode"
+    );
+
+
+/* ===========================================================
+   REGISTRATION ID
+=========================================================== */
+
+function generateRegistrationId() {
+
+
+    const random =
+        Math.floor(
+            1000 +
+            Math.random() * 9000
+        );
+
+
+    return `TS2026-${random}`;
+
+}
+
+
+/* ===========================================================
    QR CODE
-=========================== */
+=========================================================== */
 
-function generateQRCode(id){
+function generateQRCode(id) {
 
-    qrCodeContainer.innerHTML="";
+
+    qrCodeContainer.innerHTML = "";
+
+
+    if (
+        typeof QRCode === "undefined"
+    ) {
+
+        console.error(
+            "QRCode library is not loaded."
+        );
+
+        return;
+
+    }
+
 
     QRCode.toCanvas(
 
@@ -604,15 +1174,17 @@ function generateQRCode(id){
 
         {
 
-            width:220,
+            width: 220,
 
-            margin:2
+            margin: 2
 
         },
 
-        function(error,canvas){
 
-            if(error){
+        function(error, canvas) {
+
+
+            if (error) {
 
                 console.error(error);
 
@@ -620,7 +1192,10 @@ function generateQRCode(id){
 
             }
 
-            qrCodeContainer.appendChild(canvas);
+
+            qrCodeContainer.appendChild(
+                canvas
+            );
 
         }
 
@@ -628,133 +1203,218 @@ function generateQRCode(id){
 
 }
 
-/* ===========================
+
+/* ===========================================================
    FORM SUBMIT
-=========================== */
+=========================================================== */
 
-form.addEventListener("submit",async function(e){
+form.addEventListener(
+    "submit",
+    async function(e) {
 
-    e.preventDefault();
 
-    submitBtn.classList.add("btn-loading");
+        e.preventDefault();
 
-    submitBtn.disabled=true;
 
-    const registrationId=
-    generateRegistrationId();
+        if (!validatePayment()) {
 
-    registrationIdElement.textContent=
-    registrationId;
+            return;
 
-    const data={
+        }
 
-        registrationId,
 
-        fullName:
-        document.getElementById("fullName").value,
+        submitBtn.classList.add(
+            "btn-loading"
+        );
 
-        rollNumber:
-        document.getElementById("rollNumber").value,
 
-        college:
-        document.getElementById("college").value,
+        submitBtn.disabled = true;
 
-        course:
-        document.getElementById("course").value,
 
-        branch:
-        document.getElementById("branch").value,
+        const registrationId =
+            generateRegistrationId();
 
-        year:
-        document.getElementById("year").value,
 
-        mobile:
-        document.getElementById("mobile").value,
+        const teamMembers =
+            collectTeamMembers();
 
-        email:
-        document.getElementById("email").value,
 
-        event:selectedEvent,
+        const data = {
 
-        teamSize,
+            registrationId,
 
-        fee:registrationFee
+            fullName:
+                document.getElementById(
+                    "fullName"
+                ).value.trim(),
 
-    };
-try{
+            rollNumber:
+                document.getElementById(
+                    "rollNumber"
+                ).value.trim(),
 
-    /* =========================
-       SAVE REGISTRATION
-    ========================= */
+            college:
+                document.getElementById(
+                    "college"
+                ).value.trim(),
 
-    if(typeof submitRegistration === "function"){
+            course:
+                document.getElementById(
+                    "course"
+                ).value.trim(),
 
-        await submitRegistration(data);
+            year:
+                document.getElementById(
+                    "year"
+                ).value.trim(),
 
+            mobile:
+                document.getElementById(
+                    "mobile"
+                ).value.trim(),
+
+            email:
+                document.getElementById(
+                    "email"
+                ).value.trim(),
+
+            event:
+                selectedEvent,
+
+            teamSize,
+
+            fee:
+                registrationFee,
+
+            teamMembers
+
+        };
+
+
+        try {
+
+
+            /* ===========================
+               GOOGLE SHEETS
+            =========================== */
+
+            if (
+                typeof submitRegistration ===
+                "function"
+            ) {
+
+                await submitRegistration(
+                    data
+                );
+
+            }
+
+
+            /* ===========================
+               SUCCESS
+            =========================== */
+
+            registrationIdElement.textContent =
+                registrationId;
+
+
+            generateQRCode(
+                registrationId
+            );
+
+
+            /* ===========================
+               RESET
+            =========================== */
+
+            form.reset();
+
+
+            eventCards.forEach(card => {
+
+                card.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            teamContainer.innerHTML = "";
+
+            reviewContainer.innerHTML = "";
+
+
+            selectedEvent = null;
+
+            teamSize = 1;
+
+            registrationFee = 0;
+
+
+            if (selectedEventInput) {
+
+                selectedEventInput.value =
+                    "";
+
+            }
+
+
+            if (teamSizeInput) {
+
+                teamSizeInput.value =
+                    "";
+
+            }
+
+
+            if (registrationFeeInput) {
+
+                registrationFeeInput.value =
+                    "";
+
+            }
+
+
+            paymentSection.style.display =
+                "none";
+
+
+            /* ===========================
+               SHOW SUCCESS
+            =========================== */
+
+            successPage.classList.add(
+                "show"
+            );
+
+
+            successPage.style.display =
+                "flex";
+
+
+        }
+
+
+             catch (error) {
+
+            console.error(
+                "Registration Error:",
+                error
+            );
+
+            alert(
+                "Registration failed.\n\n" +
+                "Please try again."
+            );
+
+        } finally {
+
+            submitBtn.classList.remove(
+                "btn-loading"
+            );
+
+            submitBtn.disabled = false;
+
+        }
     }
-
-    /* =========================
-       GENERATE QR
-    ========================= */
-
-    generateQRCode(registrationId);
-
-    /* =========================
-       RESET REGISTRATION FORM
-    ========================= */
-
-    form.reset();
-
-    eventCards.forEach(card => {
-
-        card.classList.remove("selected");
-
-    });
-
-    teamContainer.innerHTML = "";
-
-    reviewContainer.innerHTML = "";
-
-    paymentSection.style.display = "block";
-
-    selectedEvent = null;
-
-    registrationFee = 0;
-
-    teamSize = 1;
-
-    /* =========================
-       SHOW SUCCESS PAGE
-    ========================= */
-
-    successPage.classList.add("show");
-
-    successPage.style.display = "flex";
-
-}
-catch(error){
-
-    console.error("Registration Error:", error);
-
-    alert(
-        "Registration failed.\n\n" +
-        error.message
-    );
-
-}
-finally{
-
-    submitBtn.classList.remove("btn-loading");
-
-
-    submitBtn.disabled=false;
-
-}}
-);
-document.getElementById("closePopup").addEventListener("click",()=>{
-
-    document.getElementById("successModal").classList.remove("show");
-
-    window.location.href="index.html";
-
-});
+); 
