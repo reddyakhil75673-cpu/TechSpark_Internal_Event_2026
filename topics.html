@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="TechSpark 2026 event topics and competition themes."
+    >
+
+    <title>
+        TechSpark 2026 | Event Topics
+    </title>
+
+
+    <!-- =================================================
+         GOOGLE FONT
+    ================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =================================================
+         FONT AWESOME
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =================================================
+         TOPICS CSS
+         We will create this in PHASE 2
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/topics.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================================
+         NAVBAR
+    ================================================== -->
+
+    <header class="topics-navbar">
+
+        <div class="topics-nav-container">
+
+
+            <!-- LOGO / BRAND -->
+
+            <a
+                href="index.html"
+                class="topics-brand"
+            >
+
+                <span class="brand-tech">
+                    TECH
+                </span>
+
+                <span class="brand-spark">
+                    SPARK
+                </span>
+
+                <span class="brand-year">
+                    2026
+                </span>
+
+            </a>
+
+
+            <!-- DESKTOP NAVIGATION -->
+
+            <nav
+                class="topics-nav"
+                aria-label="Main navigation"
+            >
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="events.html">
+                    Events
+                </a>
+
+                <a
+                    href="topics.html"
+                    class="active"
+                >
+                    Topics
+                </a>
+
+                <a href="registration.html">
+                    Register
+                </a>
+
+            </nav>
+
+
+            <!-- THEME TOGGLE -->
+
+            <button
+                type="button"
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="Toggle theme"
+            >
+
+                <i class="fa-solid fa-moon"></i>
+
+            </button>
+
+
+            <!-- MOBILE MENU BUTTON -->
+
+            <button
+                type="button"
+                class="mobile-menu-toggle"
+                id="mobileMenuToggle"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="topics-hero">
+
+            <div class="topics-hero-content">
+
+
+                <span class="topics-eyebrow">
+
+                    TECHSPARK 2026
+
+                </span>
+
+
+                <h1>
+
+                    Event Topics
+
+                </h1>
+
+
+                <p>
+
+                    Explore the topics, themes and programming
+                    areas for each TechSpark 2026 competition.
+
+                </p>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TOPICS SECTION
+        ================================================== -->
+
+        <section
+            class="topics-section"
+            id="topics"
+        >
+
+
+            <div class="topics-container">
+
+
+                <!-- SECTION HEADER -->
+
+                <div class="section-heading">
+
+                    <span>
+                        EXPLORE
+                    </span>
+
+                    <h2>
+                        Competition Topics
+                    </h2>
+
+                    <p>
+                        Select an event to explore its topics
+                        and challenge areas.
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     EVENT FILTER BUTTONS
+                ================================================== -->
+
+                <div
+                    class="topic-filters"
+                    role="tablist"
+                    aria-label="Competition topics"
+                >
+
+                    <button
+                        type="button"
+                        class="topic-filter active"
+                        data-event="quiz"
+                        role="tab"
+                        aria-selected="true"
+                    >
+
+                        <i class="fa-solid fa-brain"></i>
+
+                        <span>
+                            Quiz
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="topic-filter"
+                        data-event="ppt"
+                        role="tab"
+                        aria-selected="false"
+                    >
+
+                        <i class="fa-solid fa-file-powerpoint"></i>
+
+                        <span>
+                            PPT
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="topic-filter"
+                        data-event="blind-coding"
+                        role="tab"
+                        aria-selected="false"
+                    >
+
+                        <i class="fa-solid fa-eye"></i>
+
+                        <span>
+                            Blind Coding
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="topic-filter"
+                        data-event="find-code"
+                        role="tab"
+                        aria-selected="false"
+                    >
+
+                        <i class="fa-solid fa-magnifying-glass-code"></i>
+
+                        <span>
+                            Find the Code Using Story
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="topic-filter"
+                        data-event="hackathon"
+                        role="tab"
+                        aria-selected="false"
+                    >
+
+                        <i class="fa-solid fa-laptop-code"></i>
+
+                        <span>
+                            Hackathon
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TOPIC CONTENT
+                ================================================== -->
+
+                <div
+                    class="topic-content"
+                    id="topicContent"
+                >
+
+
+                    <!-- =================================================
+                         QUIZ
+                    ================================================== -->
+
+                    <article
+                        class="topic-panel active"
+                        data-panel="quiz"
+                    >
+
+                        <div class="topic-panel-header">
+
+                            <div class="topic-panel-icon">
+
+                                <i class="fa-solid fa-brain"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="topic-panel-label">
+                                    COMPETITION TOPIC
+                                </span>
+
+                                <h3>
+                                    Quiz
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="topic-panel-body">
+
+                            <h4>
+                                Computer Terminology
+                            </h4>
+
+                            <p>
+                                Computer terminology, fundamental
+                                concepts, hardware, software,
+                                operating systems, networking,
+                                databases, programming concepts
+                                and digital technology.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         PPT
+                    ================================================== -->
+
+                    <article
+                        class="topic-panel"
+                        data-panel="ppt"
+                    >
+
+                        <div class="topic-panel-header">
+
+                            <div class="topic-panel-icon">
+
+                                <i class="fa-solid fa-file-powerpoint"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="topic-panel-label">
+                                    PRESENTATION THEMES
+                                </span>
+
+                                <h3>
+                                    PPT
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="ppt-themes">
+
+
+                            <div class="theme-card">
+
+                                <span class="theme-number">
+                                    01
+                                </span>
+
+                                <h4>
+                                    AI Autonomous Disaster Response
+                                </h4>
+
+                                <p>
+                                    Build an intelligent emergency
+                                    platform that predicts disaster
+                                    impact, prioritizes affected zones,
+                                    and dynamically allocates rescue
+                                    resources using real-time data.
+                                </p>
+
+                            </div>
+
+
+                            <div class="theme-card">
+
+                                <span class="theme-number">
+                                    02
+                                </span>
+
+                                <h4>
+                                    Zero-Trust Cybersecurity &amp;
+                                    Threat Intelligence
+                                </h4>
+
+                                <p>
+                                    Create a security platform that
+                                    continuously verifies users and
+                                    devices while detecting abnormal
+                                    behavior, coordinated attacks,
+                                    and emerging cyber threats.
+                                </p>
+
+                            </div>
+
+
+                            <div class="theme-card">
+
+                                <span class="theme-number">
+                                    03
+                                </span>
+
+                                <h4>
+                                    Intelligent Healthcare Prediction
+                                    &amp; Emergency Decision System
+                                </h4>
+
+                                <p>
+                                    Develop an AI decision-support
+                                    system that analyzes emergency data,
+                                    predicts patient risk, prioritizes
+                                    cases, and assists time-critical
+                                    resource allocation.
+                                </p>
+
+                            </div>
+
+
+                            <div class="theme-card">
+
+                                <span class="theme-number">
+                                    04
+                                </span>
+
+                                <h4>
+                                    Smart City Digital Twin &amp;
+                                    Infrastructure Optimization
+                                </h4>
+
+                                <p>
+                                    Build a digital twin that uses
+                                    real-time data to model infrastructure,
+                                    predict failures, detect bottlenecks,
+                                    and optimize city or campus resources.
+                                </p>
+
+                            </div>
+
+
+                            <div class="theme-card">
+
+                                <span class="theme-number">
+                                    05
+                                </span>
+
+                                <h4>
+                                    AI Deepfake &amp;
+                                    Misinformation Detection
+                                </h4>
+
+                                <p>
+                                    Design a multimodal system that
+                                    detects manipulated text, images,
+                                    audio, and video while evaluating
+                                    digital-content credibility using
+                                    multiple evidence signals.
+                                </p>
+
+                            </div>
+
+
+                            <div class="theme-card">
+
+                                <span class="theme-number">
+                                    06
+                                </span>
+
+                                <h4>
+                                    Autonomous Traffic &amp;
+                                    Emergency Route Optimization
+                                </h4>
+
+                                <p>
+                                    Create an intelligent traffic system
+                                    that predicts congestion, adapts
+                                    signals, detects incidents, and
+                                    generates optimal routes for
+                                    emergency vehicles.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         BLIND CODING
+                    ================================================== -->
+
+                    <article
+                        class="topic-panel"
+                        data-panel="blind-coding"
+                    >
+
+                        <div class="topic-panel-header">
+
+                            <div class="topic-panel-icon">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="topic-panel-label">
+                                    BASIC PROGRAMMING LANGUAGES
+                                </span>
+
+                                <h3>
+                                    Blind Coding
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="topic-panel-body">
+
+                            <p>
+                                Participants read and understand code
+                                without relying on an editor's
+                                suggestions. The challenge focuses on
+                                identifying syntax, logic, output and
+                                errors in basic programs.
+                            </p>
+
+
+                            <h4>
+                                Programming Languages
+                            </h4>
+
+
+                            <div class="language-list">
+
+                                <span>
+                                    C
+                                </span>
+
+                                <span>
+                                    Java
+                                </span>
+
+                                <span>
+                                    Python
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         FIND THE CODE USING STORY
+                    ================================================== -->
+
+                    <article
+                        class="topic-panel"
+                        data-panel="find-code"
+                    >
+
+                        <div class="topic-panel-header">
+
+                            <div class="topic-panel-icon">
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="topic-panel-label">
+                                    PROGRAMMING LANGUAGES
+                                </span>
+
+                                <h3>
+                                    Find the Code Using Story
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="topic-panel-body">
+
+                            <p>
+                                Participants solve a story-based coding
+                                challenge by identifying clues,
+                                understanding the given logic and finding
+                                the correct code or output. Questions can
+                                be based on basic computer programming
+                                languages and programming fundamentals.
+                            </p>
+
+
+                            <h4>
+                                Programming Languages
+                            </h4>
+
+
+                            <div class="language-list">
+
+                                <span>
+                                    C
+                                </span>
+
+                                <span>
+                                    Java
+                                </span>
+
+                                <span>
+                                    Python
+                                </span>
+
+                                <span>
+                                    Basic Programming Concepts
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         HACKATHON
+                    ================================================== -->
+
+                    <article
+                        class="topic-panel"
+                        data-panel="hackathon"
+                    >
+
+                        <div class="live-announcement">
+
+                            <div class="live-icon">
+
+                                <i class="fa-solid fa-bolt"></i>
+
+                            </div>
+
+
+                            <span class="live-badge">
+                                LIVE ANNOUNCEMENT
+                            </span>
+
+
+                            <h3>
+                                Hackathon Topics
+                            </h3>
+
+
+                            <p>
+                                Topics will be announced live
+                                during the event.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="topics-footer">
+
+        <div class="topics-footer-container">
+
+            <div>
+
+                <h3>
+                    TECHSPARK 2026
+                </h3>
+
+                <p>
+                    Aditya Degree College Gajuwaka (Co-ed)
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <p>
+                    Computer Science Department
+                </p>
+
+                <p>
+                    &copy; 2026 TechSpark. All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =================================================
+         TOPICS JAVASCRIPT
+         We will create this in PHASE 3
+    ================================================== -->
+
+    <script src="js/topics.js"></script>
+
+</body>
+
+</html>

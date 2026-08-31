@@ -603,6 +603,8 @@ header{
 
 .time-box span{
 
+    display:block;
+
     font-size:54px;
 
     font-weight:700;
@@ -611,8 +613,15 @@ header{
 
     line-height:1;
 
-}
+    opacity:1;
 
+    visibility:visible;
+
+    animation:none;
+
+    transition:none;
+
+}
 .time-box small{
 
     margin-top:10px;
