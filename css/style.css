@@ -1905,3 +1905,56 @@ body.light-theme .administration{
     background:#f8fafc !important;
 
 }
+/* ================================
+   MOBILE RESPONSIVE FIX
+================================ */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Header */
+    header,
+    .header,
+    .navbar,
+    nav {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Navigation */
+    nav ul {
+        width: 100%;
+        max-width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav li {
+        max-width: 100%;
+    }
+
+    nav a {
+        white-space: nowrap;
+    }
+
+    /* Main containers */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Images */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
